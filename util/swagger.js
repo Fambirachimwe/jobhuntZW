@@ -29,7 +29,7 @@ const swaggerDocs = (app, port) => {
         res.send(swaggerSpec)
     });
 
-    console.info(`Docs available at http://localhost:${port}/docs`)
+    console.info(`Docs available at https://jobhuntzw-production.up.railway.app:${port}/docs`)
 }
 
 

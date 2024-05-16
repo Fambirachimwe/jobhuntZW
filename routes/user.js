@@ -321,4 +321,107 @@ router.post('/:id/unsubscribe', async (req, res) => {
     }
 });
 
+
+
+/**
+ * @swagger
+ * /users/{userId}/categories/add:
+ *   put:
+ *     summary: Add categories to user's subscriptions
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the user
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               categories:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *     responses:
+ *       200:
+ *         description: Categories added successfully
+ *       404:
+ *         description: User not found
+ */
+
+router.put('/:userId/categories/add', async (req, res) => {
+    const { userId } = req.params;
+    const { categories } = req.body;
+
+    console.log(req.body)
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.categoriesSubscribed = [...user.categoriesSubscribed, ...categories];
+        await user.save();
+
+        res.status(200).json({ message: 'Categories added successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+/**
+ * @swagger
+ * /users/{userId}/categories/remove:
+ *   put:
+ *     summary: Add categories to user's subscriptions
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the user
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               categories:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *     responses:
+ *       200:
+ *         description: Categories added successfully
+ *       404:
+ *         description: User not found
+ */
+router.put('/:userId/categories/remove', async (req, res) => {
+    const { userId } = req.params;
+    const { categories } = req.body;
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        user.categoriesSubscribed = user.categoriesSubscribed.filter(cat => !categories.includes(cat));
+        await user.save();
+
+        res.status(200).json({ message: 'Categories removed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 export default router;

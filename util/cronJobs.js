@@ -4,6 +4,7 @@ import { insertJobsIntoDatabase } from './insertIntoDB.js';
 import { Job } from '../models/job.js';
 import User from '../models/User.js';
 import { sendSMSNotification } from './sendSMSNotification.js';
+import { sendEmailNotification } from './senEmailNotificaltion.js';
 
 // import { scheduleSMSNotificationsQueue } from './sendSMSNotificationQueue.js';
 

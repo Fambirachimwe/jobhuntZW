@@ -1,3 +1,4 @@
+import 'dotenv/config.js';
 import express from "express";
 import jobRoutes from "./routes/jobs.js";
 import userRoutes from "./routes/user.js"
@@ -7,7 +8,7 @@ import swaggerDocs from "./util/swagger.js";
 
 // connection to the mongoose database 
 
-mongoose.connect("mongodb://127.0.0.1:27017/JobAllerts");
+mongoose.connect(`${process.env.MONGODB_URL}`);
 mongoose.connection.once('open', async () => {
     console.log('Connected to JobAlerts database');
 }).on('error', (error) => {

@@ -4,12 +4,7 @@ import { Job } from '../models/job.js';
 import mongoose from 'mongoose';
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/JobAllerts");
-mongoose.connection.once('open', async () => {
-    console.log('Connected to JobAlerts database');
-}).on('error', (error) => {
-    console.log('connection error ', error);
-});
+
 
 // Function to send email notification to subscribed users
 export const sendEmailNotification = async (jobsList, userList) => {
@@ -78,6 +73,8 @@ export const sendEmailNotification = async (jobsList, userList) => {
 
 // Example usage:
 // const allJobs = await Job.find();
+
+
 
 // const usersList = await User.find()
 // sendEmailNotification(allJobs, usersList);

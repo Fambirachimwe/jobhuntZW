@@ -4,12 +4,6 @@ import User from '../models/User.js';
 import mongoose from 'mongoose';
 import Queue from 'bull';
 
-mongoose.connect("mongodb://127.0.0.1:27017/JobAllerts");
-mongoose.connection.once('open', async () => {
-    console.log('Connected to JobAlerts database');
-}).on('error', (error) => {
-    console.log('connection error ', error);
-});
 
 
 // Twilio credentials

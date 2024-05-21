@@ -38,7 +38,7 @@ export const scrapeJobs = (category) => {
                     const _$ = cheerio.load(request?.data)
                     const applyParagraph = _$('div.single-candidate-widget h3')
                         .filter((index, element) => $(element).text().trim() === 'How to Apply')
-                        .next('p');
+                        .nextAll('p');
 
                     let instructions;
 

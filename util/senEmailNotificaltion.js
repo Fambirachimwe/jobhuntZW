@@ -22,11 +22,12 @@ export const sendEmailNotification = async (jobsList, userList) => {
             // console.log(userJobs)  // these are the jobs to be sent to the user
             if (userJobs.length > 0) {
                 // Compose email content
-                let emailContent = `<h2>Jobs Notification</h2><p>Hello ${user.email},<br/>Here are the latest job opportunities:</p><ul>`;
+                let emailContent = `<h2>Jobs Notification</h2><p>Hello ${user.email},<br/>Here are the latest job opportunities:</p> <br/><br/><ul>`;
 
                 // Append job details to email content
                 for (let job of userJobs) {
-                    emailContent += `<li><strong>${job.title}</strong> at ${job.company}.<br/> Expires on ${job.expires}.<br/> <a href="${job.howToApply.link}">${job.howToApply.instructions}</a></li>`;
+                    emailContent += `<li><strong>${job.title}</strong> at ${job.company}.<br/> Expires on ${job.expires}.<br/> 
+                    <a href="${job.howToApply.link}"> ${job.howToApply.link ? (job.howToApply.link) : ""} </a><br/>${job.howToApply.instructions}</li> <br/><br/>`;
 
                     const dbUser = await User.findById(user?._id)
 

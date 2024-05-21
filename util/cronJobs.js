@@ -16,6 +16,12 @@ import { sendEmailNotification } from './senEmailNotificaltion.js';
 // 5 seconds
 // '*/5 * * * * *'
 
+// every minute
+// '* * * * *'
+
+
+// midnight
+// 0 0 * * *'
 // cron for scrapping for jobs 
 export const runCronJob = (categories) => {
     // Schedule the cron job to run daily at a specific time (e.g., midnight)
@@ -73,7 +79,7 @@ export const runCronJobEmailNotifications = () => {
 // send SMS Notifications
 export const runCronJobSMSNotifications = () => {
     // Schedule the cron job to run daily at a specific time (e.g., 10am everyday)
-    cron.schedule('0 10 * * *', async () => {
+    cron.schedule('0 0 * * *', async () => {
         try {
             // Iterate over each category in the list
             const allJobs = await Job.find();
@@ -92,7 +98,7 @@ export const removeExpiredJobs = () => {
     // Schedule the cron job to run daily 
 
     console.log("removing expired Jobs")
-    cron.schedule('0 1 * * *', async () => {
+    cron.schedule('0 0 * * *', async () => {
         try {
             // Get the current date
             const currentDate = new Date();

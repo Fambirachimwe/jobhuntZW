@@ -98,7 +98,7 @@ export const removeExpiredJobs = () => {
     // Schedule the cron job to run daily 
 
     console.log("removing expired Jobs")
-    cron.schedule('0 0 * * *', async () => {
+    cron.schedule('0 1 * * *', async () => {
         try {
             // Get the current date
             const currentDate = new Date();
